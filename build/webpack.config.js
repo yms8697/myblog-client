@@ -1,5 +1,6 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin') 
+const webpack = require('webpack')
 const isDev = process.env.NODE_ENV === 'development'
 const config = {
     entry: {
@@ -24,11 +25,19 @@ const config = {
     ]
 }
 if (isDev) {
+    // 热更新配置
+    config.entry = {
+        app: [
+            'react-hot-loader/patch',
+            path.join(__dirname, '../src/index.js')
+        ]
+    }
+    // webpack-dev-server配置
     config.devServer = {
         host: '0.0.0.0',
         port: '8000',
         contentBase: path.join(__dirname, '../dist'),
-        //hot: true,
+        hot: true,
         overlay: {
             errors: true
         },
@@ -37,5 +46,6 @@ if (isDev) {
             index: '/public/index.html'
         }
     }
+    config.plugins.push(new webpack.HotModuleReplacementPlugin)
 }
 module.exports = config
