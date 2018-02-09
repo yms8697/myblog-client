@@ -8,7 +8,7 @@ const renderDom = (Component) => {
     <AppContainer>
       <Component />
     </AppContainer>,
-    root,
+    root
   )
 }
 renderDom(App)
