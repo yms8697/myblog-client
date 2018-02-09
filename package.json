@@ -9,7 +9,7 @@
     "clear": "rimraf dist",
     "build": "npm run clear && npm run build:client",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
-    "lint": "eslint --ext .js --ext .jsx src/",
+    "lint": "eslint --fix --ext .js --ext .jsx src",
     "precommit": "npm run lint"
   },
   "repository": {
