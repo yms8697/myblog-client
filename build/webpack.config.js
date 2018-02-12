@@ -12,6 +12,9 @@ const config = {
     path: path.join(__dirname, '../dist'),
     publicPath: '/public/',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -25,13 +28,28 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.css$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
-    new HTMLPlugin(),
+    new HTMLPlugin({
+      template: path.join(__dirname, '../src/template.html'),
+    }),
   ],
 }
 if (isDev) {
+  // config.devtool = '#cheap-module-eval-source-map'
   // 热更新配置
   config.entry = {
     app: [
@@ -53,6 +71,7 @@ if (isDev) {
     historyApiFallback: {
       index: '/public/index.html',
     },
+    proxy: { '/api': 'http://localhost:3000' },
   }
   config.plugins.push(new webpack.HotModuleReplacementPlugin)//eslint-disable-line
 }

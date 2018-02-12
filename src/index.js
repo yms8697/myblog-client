@@ -1,20 +1,25 @@
 import React from 'react'
-import ReactDom from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import App from './index.jsx'//eslint-disable-line
-const root = document.body
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'//eslint-disable-line
+import { BrowserRouter } from 'react-router-dom'
+import './index.css'
+import App from './views/index'
+
+const root = document.getElementById('root')
 const renderDom = (Component) => {
-  ReactDom.render(
+  ReactDOM.render(
     <AppContainer>
-      <Component />
+      <BrowserRouter>
+        <Component />
+      </BrowserRouter>
     </AppContainer>,
     root,
   )
 }
 renderDom(App)
 if (module.hot) {
-  module.hot.accept('./index.jsx', () => {
-    const NextApp = require('./index.jsx').default//eslint-disable-line
+  module.hot.accept('./views/index', () => {
+    const NextApp = require('./views/index').default//eslint-disable-line
     renderDom(NextApp)
   })
 }
