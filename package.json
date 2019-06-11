@@ -24,7 +24,7 @@
   "homepage": "https://github.com/yms8697/myblog-client#readme",
   "dependencies": {
     "antd": "^3.2.0",
-    "axios": "^0.17.1",
+    "axios": ">=0.18.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-markdown-renderer": "^1.4.0",
